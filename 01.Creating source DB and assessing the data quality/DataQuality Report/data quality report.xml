@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources>
+    <DtsDataSource ID="{E7D95C22-BB2E-4CC5-B6BF-D5E184C577F9}" Name="Agency">
+      <DtsConnectionManagerID>Agency</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{EC3BDAF5-EE60-4FC3-AAE8-967BC9CA8817}" Name="calendar_dates">
+      <DtsConnectionManagerID>calendar_dates</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{D85D8924-C67C-4D18-9505-83F91EC010D4}" Name="data quality report.xml">
+      <DtsConnectionManagerID>data quality report.xml</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{45900B93-1D49-4E5E-AD80-31105767A7DC}" Name="fare_attributes">
+      <DtsConnectionManagerID>fare_attributes</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{6E7678F0-C88C-4E22-830E-FB96849B7599}" Name="fare_rules">
+      <DtsConnectionManagerID>fare_rules</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{1A166CF0-ECF3-44D5-A27C-714802EF2D9F}" Name="frequencies">
+      <DtsConnectionManagerID>frequencies</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{52407D21-804A-4A54-A1AE-3824D9494262}" Name="LocalHost.master">
+      <DtsConnectionManagerID>LocalHost.master</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{B4063197-7223-48A5-9469-7F4E08C6A3D9}" Name="LocalHost.STM_SRC">
+      <DtsConnectionManagerID>LocalHost.STM_SRC</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{30221D0E-8077-4738-A68C-0FD8F668A626}" Name="LocalHost.STM_SRC Data Quality">
+      <DtsConnectionManagerID>LocalHost.STM_SRC Data Quality</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{EFC08A76-56DA-4375-8BFF-4A184170B31B}" Name="routes">
+      <DtsConnectionManagerID>routes</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{FE70803D-2227-45F9-BD67-68B45AA00FBD}" Name="shapes">
+      <DtsConnectionManagerID>shapes</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{5883328D-E645-4E3C-9D80-E98C33EBFD52}" Name="stop_times">
+      <DtsConnectionManagerID>stop_times</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{E31A8705-0D38-406F-8F3E-C2BBFC6B8CD8}" Name="Stops">
+      <DtsConnectionManagerID>Stops</DtsConnectionManagerID>
+    </DtsDataSource>
+    <DtsDataSource ID="{72513948-53A6-468F-98B7-53ED38B6B347}" Name="trips">
+      <DtsConnectionManagerID>trips</DtsConnectionManagerID>
+    </DtsDataSource>
+  </DataSources>
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table Schema="dbo" Table="shapes" />
+        <KeyColumns>
+          <Column IsWildCard="false" ColumnName="shape_id" />
+          <Column IsWildCard="false" ColumnName="shape_pt_sequence" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table Schema="dbo" Table="stops" />
+        <Column IsWildCard="false" ColumnName="stop_name" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table Schema="dbo" Table="routes" />
+        <Column IsWildCard="false" ColumnName="route_short_name" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table Schema="dbo" Table="trips" />
+        <Column IsWildCard="false" ColumnName="trip_id" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles>
+      <ColumnNullRatioProfile ProfileRequestID="NullRatioReq" IsExact="true">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table DataSource="." Database="STM_SRC" Schema="dbo" Table="routes" RowCount="221" />
+        <Column Name="route_short_name" SqlDbType="VarChar" MaxLength="50" Precision="255" Scale="255" LCID="1033" CodePage="0" IsNullable="true" StringCompareOptions="0" />
+        <NullCount>0</NullCount>
+      </ColumnNullRatioProfile>
+      <ColumnValueDistributionProfile IsExact="true" ProfileRequestID="ValueDistReq">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table DataSource="." Database="STM_SRC" Schema="dbo" Table="trips" RowCount="168344" />
+        <Column Name="trip_id" SqlDbType="VarChar" MaxLength="50" Precision="255" Scale="255" LCID="1033" CodePage="0" IsNullable="false" StringCompareOptions="0" />
+        <NumberOfDistinctValues>168344</NumberOfDistinctValues>
+      </ColumnValueDistributionProfile>
+      <CandidateKeyProfile IsExact="true" ProfileRequestID="KeyReq">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table DataSource="." Database="STM_SRC" Schema="dbo" Table="shapes" RowCount="49459" />
+        <KeyColumns>
+          <Column Name="shape_id" SqlDbType="VarChar" MaxLength="50" Precision="255" Scale="255" LCID="1033" CodePage="0" IsNullable="true" StringCompareOptions="0" />
+          <Column Name="shape_pt_sequence" SqlDbType="VarChar" MaxLength="50" Precision="255" Scale="255" LCID="1033" CodePage="0" IsNullable="true" StringCompareOptions="0" />
+        </KeyColumns>
+        <IsExactKey>true</IsExactKey>
+      </CandidateKeyProfile>
+      <ColumnLengthDistributionProfile ProfileRequestID="LengthDistReq" IsExact="true">
+        <DataSourceID>{30221D0E-8077-4738-A68C-0FD8F668A626}</DataSourceID>
+        <Table DataSource="." Database="STM_SRC" Schema="dbo" Table="stops" RowCount="9533" />
+        <Column Name="stop_name" SqlDbType="VarChar" MaxLength="5000" Precision="255" Scale="255" LCID="1033" CodePage="0" IsNullable="true" StringCompareOptions="0" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+        <MinLength>8</MinLength>
+        <MaxLength>53</MaxLength>
+        <LengthDistribution>
+          <LengthDistributionItem>
+            <Length>23</Length>
+            <Count>671</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>46</Length>
+            <Count>22</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>29</Length>
+            <Count>334</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>15</Length>
+            <Count>292</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>52</Length>
+            <Count>1</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>32</Length>
+            <Count>161</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>26</Length>
+            <Count>502</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>12</Length>
+            <Count>26</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>35</Length>
+            <Count>72</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>43</Length>
+            <Count>27</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>49</Length>
+            <Count>20</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>21</Length>
+            <Count>736</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>27</Length>
+            <Count>372</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>38</Length>
+            <Count>50</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>44</Length>
+            <Count>34</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>50</Length>
+            <Count>14</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>24</Length>
+            <Count>536</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>47</Length>
+            <Count>19</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>30</Length>
+            <Count>301</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>18</Length>
+            <Count>552</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>10</Length>
+            <Count>2</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>41</Length>
+            <Count>51</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>19</Length>
+            <Count>680</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>25</Length>
+            <Count>450</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>36</Length>
+            <Count>78</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>13</Length>
+            <Count>62</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>42</Length>
+            <Count>32</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>22</Length>
+            <Count>649</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>39</Length>
+            <Count>52</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>33</Length>
+            <Count>153</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>16</Length>
+            <Count>373</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>53</Length>
+            <Count>1</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>45</Length>
+            <Count>18</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>48</Length>
+            <Count>24</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>17</Length>
+            <Count>565</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>31</Length>
+            <Count>166</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>40</Length>
+            <Count>40</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>34</Length>
+            <Count>99</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>11</Length>
+            <Count>6</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>20</Length>
+            <Count>716</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>28</Length>
+            <Count>340</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>14</Length>
+            <Count>154</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>37</Length>
+            <Count>75</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>8</Length>
+            <Count>3</Count>
+          </LengthDistributionItem>
+          <LengthDistributionItem>
+            <Length>51</Length>
+            <Count>2</Count>
+          </LengthDistributionItem>
+        </LengthDistribution>
+      </ColumnLengthDistributionProfile>
+    </Profiles>
+  </DataProfileOutput>
+</DataProfile>
